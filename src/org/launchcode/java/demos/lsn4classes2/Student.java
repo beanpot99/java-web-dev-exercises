@@ -30,15 +30,49 @@ public class Student {
 
 
      //TODO: Uncomment and complete the getGradeLevel method here:
-//    public String getGradeLevel() {
+   public String getGradeLevel() {
 //        // Determine the grade level of the student based on numberOfCredits
-//    }
+            //instance method
+       String studentLevel;
+       if(numberOfCredits>=0 && numberOfCredits<=29){
+           studentLevel = "Freshman";
+       }else if(numberOfCredits >=30 && numberOfCredits <=59){
+           studentLevel = "Sophomore";
+       }else if(numberOfCredits>=60 && numberOfCredits<=89){
+           studentLevel = "Junior";
+       }else{
+           studentLevel = "Senior";
+       }
+       return studentLevel;
+   }
 
     // TODO: Complete the addGrade method.
     public void addGrade(int courseCredits, double grade) {
         // Update the appropriate fields: numberOfCredits, gpa
+        double currentQuality=gpa * numberOfCredits;
+        double newQuality = grade * courseCredits;
+        double totalQuality = currentQuality + newQuality;
+        numberOfCredits = numberOfCredits + courseCredits;
+        gpa = totalQuality/numberOfCredits;
+
+    }
+    public boolean equals(Object toBeCompared){
+        if(toBeCompared == this){
+            return true;
+        }
+        if(toBeCompared == null){
+            return false;
+        }
+        if(toBeCompared.getClass() != getClass()){
+            return false;
+        }
+        Student theStudent = (Student) toBeCompared;
+        return theStudent.getGpa() == getGpa();
     }
 
+    public String toString(){
+        return name + "(Credits: " + numberOfCredits + ", GPA: " + gpa;
+    }
     // TODO: Add your custom 'toString' method here. Make sure it returns a well-formatted String rather
     //  than just the class fields.
 
@@ -79,11 +113,16 @@ public class Student {
 
     public static void main(String[] args) {
         Student sally = new Student("Sally",1,1,4.0);
+        Student tom = new Student("Tom", 2, 2, 3.8);
         System.out.println("The Student class works! " + sally.getName() + " is a student!");
         System.out.println(sally);
         sally.addGrade(12, 3.5);
         System.out.println(sally);
         sally.addGrade(25, 3.8);
         System.out.println(sally);
+        System.out.println(sally.equals(tom));
+        System.out.println(sally.getGradeLevel());
+        tom.addGrade(1, 3.2);
+        System.out.println(tom.gpa);
     }
 }
