@@ -2,7 +2,7 @@ package exercises.technology.main;
 
 import java.util.Date;
 
-public class Computer {
+public class Computer extends AbstractEntity {
     private String name;
     private String operatingSystem;
     private int yearMade;
